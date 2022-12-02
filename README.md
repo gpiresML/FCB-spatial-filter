@@ -25,12 +25,13 @@ For more information about LSC speller and datasets please check:
 - epochs are all 1 second long
 
 ## Code
-- the FCB toolbox is in folder 'FCB_toolbox' 
+- The FCB toolbox is in folder 'FCB_toolbox' 
 - Some analysis files are in folder 'rsquare'
 - The main file is main.m (Matlab version) or main.py (Python version) 
 
-This example is self-explanatory from code and comments - just run **main.m** or **main.py** and select the dataset you want to test
-To show the discrimination effect of FCB,  statistical r-square is applied on data before and after FCB filtering 
+This example is self-explanatory from code and comments - just run **main.m** or **main.py** and select the dataset you want to test.
+
+To show the discrimination effect of FCB,  statistical r-square is applied on data before and after FCB filtering. 
 
 ## Paper(s) and dataset(s)
 If you use the FCB toolbox please refer to [1]
