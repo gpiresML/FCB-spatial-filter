@@ -1,6 +1,6 @@
 # Fisher Criterion Beamformer - Statistical spatial filter for Event Related Potentials 
 
-This archive provides a Toolbox (Matllab and Python versions) implementing a Statistical Spatial Filter called Fisher Criterion Beamformer, specifically designed to improve the discrimination of Event Related Potentials (ERPs), proposed in [1] (section 3.2.2):
+This repository provides a Toolbox (Matlab and Python versions) implementing a Statistical Spatial Filter called Fisher Criterion Beamformer, specifically designed to improve the discrimination of Event Related Potentials (ERPs), proposed in [1] (section 3.2.2):
 
 * [1] Gabriel Pires, Urbano Nunes and  Miguel Castelo-Branco (2011), "Statistical Spatial Filtering for 
    a P300-based BCI: Tests in able-bodied, and Patients with Cerebral Palsy and Amyotrophic Lateral 
