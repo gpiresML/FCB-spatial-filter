@@ -3,6 +3,7 @@ function erg = rsqu(q, r)
 %       two one-dimensional distributions given by
 %       the vectors q and r
 
+% https://www.bci2000.org/mediawiki/index.php/Glossary#r-squared
 
 q=double(q);
 r=double(r);
