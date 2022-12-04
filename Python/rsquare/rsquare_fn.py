@@ -7,6 +7,8 @@ RSQU   erg=rsqu(r, q) computes the r2-value for
        two one-dimensional distributions given by
        the vectors q and r
 
+https://www.bci2000.org/mediawiki/index.php/Glossary#r-squared
+
 r2 version adapted to Python
 and r2 color map visualization
 
