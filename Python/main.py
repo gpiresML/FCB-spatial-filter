@@ -161,7 +161,7 @@ for ch in np.arange(N_ch):
         rsq[samp, ch] = rsquare_fn.rsquare(ytf[ch, samp,:],yntf[ch, samp,:])
 
 rsquare_fn.plot_rsquare(t,rsq)
-del rsq
+#del rsq
 
 
 plt.plot(t,ytf_mean[0,:],'r',label=label1)
@@ -174,3 +174,56 @@ plt.fill_between(t,ytf_mean[0,:]+ytf_std[0,:], ytf_mean[0,:]-ytf_std[0,:], alpha
 plt.fill_between(t,yntf_mean[0,:]+yntf_std[0,:], yntf_mean[0,:]-yntf_std[0,:], alpha=0.2)
 plt.show()
 
+
+#%% Feature selection
+
+def sel_features(r2_scores, max_feat):
+    indice=np.argsort(r2_scores)[::-1]   #descending order
+    best_indice = indice[:max_feat]
+    return best_indice
+
+#selecting features based on Projection 1
+Nfeat = 100
+best_index_feat = sel_features(rsq[:, 0],100)
+#best_index_feat
+#np.shape(rsq)
+
+#New Feature vectors
+X_class1 = ytf[0,best_index_feat,:]   #Projection1 Target  [Nfeatx90]
+X_class2 = yntf[0,best_index_feat,:]  #Projection1 Non-Target [Nfeatx840]
+np.shape(X_class1)
+np.shape(yntf)
+
+#Prepare features for classification
+def set_class_labels(x1,x2):
+    class1=np.transpose(x1)
+    class2=np.transpose(x2)
+    #np.shape(class1)
+    #np.shape(class2)
+
+    # Combine the class1 and class2 variables into a feature matrix X
+    X = (*class1,*class2)  #np.concatenate((class1, class2), axis=0)
+    np.shape(X)
+   # Create the corresponding target labels
+    y = [0] * len(class1) + [1] * len(class2)
+    np.shape(y)
+    return X,y
+
+Xtrain, ytrain = set_class_labels(X_class1, X_class2)
+
+
+#%% Classification and testing
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.model_selection import cross_val_score
+
+gnb = GaussianNB()
+fit = gnb.fit(Xtrain, ytrain)
+ypred = gnb.predict(Xtrain)
+print("Balanced_accuracy", balanced_accuracy_score(ytrain, ypred))
+#CAREFUL - THIS MAY BE A VERY BIASED RESULT AS THE SAME DATA WERE USED TO TRAIN AND TEST
+
+balanced_accuracy_scores = cross_val_score(gnb, Xtrain, ytrain, cv=3, scoring='balanced_accuracy')
+balanced_accuracy_scores
+print("Mean accuracy - cross validation", np.mean(balanced_accuracy_scores))
+#CAREFUL - HERE THE CLASSIFIER IS NOT BIASED BUT ...
